@@ -1,0 +1,11 @@
+{
+  "name": "projectsequelize",
+  "version": "1.0.0",
+  "description": "proyecto realizado con ORM sequilize ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mabravo153",
+  "license": "ISC"
+}
