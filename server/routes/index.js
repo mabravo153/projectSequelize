@@ -4,9 +4,13 @@ const router = express.Router();
 
 const routesProject = () => {
 
-    router.get('/', (req,res) => res.render('index'))
+    router.get('/', (req,res) => res.render('index', {
+        pagina: 'Inicio'
+    }))
 
-    router.get('/nosotros', (req,res) => res.render('nosotros') )
+    router.get('/nosotros', (req,res) => res.render('nosotros', {
+        pagina: 'Sobre nosotros'
+    }))
 
     
     return router 
