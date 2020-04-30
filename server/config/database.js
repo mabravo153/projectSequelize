@@ -6,4 +6,4 @@ const sequelize = new Sequelize('sequelize', 'mabravo153', 'Barranquilla1.', {
 })
 
 
-module.exports = sequelize 
+module.exports = sequelize;
