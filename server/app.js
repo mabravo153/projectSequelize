@@ -5,6 +5,8 @@ const path = require('path')
 const rutas = require('./routes')(); 
 const configs = require('./config');
 
+
+
 //integracion con las configuraciones 
 server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json()); //body-parser
