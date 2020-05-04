@@ -1,97 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const Viajes = require('../models/Viajes')
-const Testimoniales = require('../models/Testimoniales')
 
+const nosotrosController = require('../controllers/nosotrosController')
+const homeController = require('../controllers/homeController')
+const viajesController = require('../controllers/viajesController')
+const testimonialesController = require('../controllers/testimonialesController')
 
 const routesProject = () => {
 
-    router.get('/', (req,res) => res.render('index', {
-        pagina: 'Inicio'
-    }))
+    router.get('/', homeController.show)
 
-    router.get('/nosotros', (req,res) => res.render('nosotros', {
-        pagina: 'Sobre nosotros'
-    }))
+    router.get('/nosotros',nosotrosController.nosotrosView)
 
-    router.get('/viajes', async (req,res) => {
+    router.get('/viajes', viajesController.show)
 
-        const result = await Viajes.findAll()
-     
-        return res.render('viajes', {
-            pagina: 'Viajes disponibles',
-            result
-        })
-    })
+    router.get('/viajes/:id',viajesController.showByID)
 
-    router.get('/viajes/:id', async (req, res) => {
+    router.get('/testimoniales', testimonialesController.show)
 
-        const idViaje = req.params.id
-        const viaje = await Viajes.findOne({
-            where: {
-                id: idViaje
-            }
-        })
-
-        return res.render('viaje', {
-            viaje
-        })
-
-    })
-
-    router.get('/testimoniales', async (req,res) => {
-        
-        const testimoniales = await Testimoniales.findAll()
-        
-        return res.render('testimoniales', {
-            pagina: 'Testimonios',
-            testimoniales
-        })
-    })
-
-    router.post('/testimoniales', async (req,res) => {
-
-        let { nombre, correo, mensaje } = req.body 
-        let errores = []
-
-        //validaciones 
-        if(!nombre){
-            errores.push({mensaje:'Agrega tu nombre'})
-        }
-        if(!correo){
-            errores.push({mensaje:'Agrega tu correo'})
-        }
-        if(!mensaje){
-            errores.push({mensaje:'Agrega un mensaje'})
-        }
-
-        //verificar si tenemos errores
-        if(errores.length){
-            return res.render('testimoniales', {
-                errores,
-                nombre,
-                correo,
-                mensaje
-            })
-        }else{
-
-            try{
-                await Testimoniales.create({
-                    nombre_usuario: nombre,
-                    correo,
-                    mensaje
-                })
-
-                res.redirect('/testimoniales')
-    
-            }catch (err){
-                console.error(err)
-            }
-            
-        }
-        
-
-    })
+    router.post('/testimoniales', testimonialesController.store)
     
     return router 
 }

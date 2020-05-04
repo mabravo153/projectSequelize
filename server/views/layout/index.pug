@@ -8,8 +8,9 @@ html(lang="en")
         link(href='https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Open+Sans:wght@400;700&family=Staatliches&display=swap' rel='stylesheet')
         link(rel="stylesheet", href="/css/app.css")
         title #{siteName} #{pagina}
-    body
+    body(class=clase)
         include templates/header
+        block slider
         block contenido
         include templates/footer
            

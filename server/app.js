@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path')
 const rutas = require('./routes')(); 
 const configs = require('./config');
-
+require('dotenv').config({path: 'var.env'})
 
 
 //integracion con las configuraciones 
@@ -21,8 +21,10 @@ server.locals.siteName = ambiente.siteName;
 
 const fecha = new Date()
 server.locals.actualYear = fecha.getFullYear();
+server.locals.path = server.get('path')
+
 
 
 
 //puerto a escuchar 
-server.listen(9000, (req, res) => console.log('Server up, port 9000') )
+server.listen(process.env.PORT, (req, res) => console.log('Server up, port 9000') )
